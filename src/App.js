@@ -68,8 +68,9 @@ function App() {
     }));
   }
 
-  const aoDeletar = () => {
-    console.log('clicou em deletar!');
+  const deletarColaborador = (id) => {
+    setColaboradores(colaboradores.filter(colaborador => colaborador.id !== id))
+    console.log('deletando colaborador: ', id);
   }
 
   return (
@@ -78,15 +79,11 @@ function App() {
       <Formulario times={times.map(time => time.nome)} aoColaboradorCadastrado={colaborador => aoNovoColaboradorAdicionado(colaborador)} />
       {times.map(time => 
           <Time 
-            key={time.id} 
-            id={time.id}
-            nome={time.nome} 
-            cor={time.cor}
-            corSecundaria={time.corSecundaria}
+            key={time.id}
             colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
-            aoDeletarColaborador={aoDeletar}
+            aoDeletar={deletarColaborador}
             mudarCor={mudarCorDoTime}
-            time={times}
+            time={time}
           />
         )}
       <Rodape />
