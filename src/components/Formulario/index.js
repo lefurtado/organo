@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Botao from '../Botao';
-import CampoTexto from '../CampoTexto';
+import Campo from '../Campo';
 import ListaSuspensa from '../ListaSuspensa';
 import './Formulario.css';
 
@@ -40,21 +40,21 @@ const Formulario = ({ times, aoColaboradorCadastrado, cadastrarTime }) => {
         <section className='formulario'>
             <form onSubmit={aoSalvar}>
                 <h2>Preencha os dados para criar o card do colaborador.</h2>
-                    <CampoTexto
+                    <Campo
                         obrigatorio={true}
                         label='Nome'
                         placeholder='Digite seu nome'
                         valor={nome}
                         aoAlterado={valor => setNome(valor)}
                     />
-                    <CampoTexto
+                    <Campo
                         obrigatorio={true}
                         label='Cargo'
                         placeholder='Digite seu cargo'
                         valor={cargo}
                         aoAlterado={valor => setCargo(valor)}
                     />
-                    <CampoTexto
+                    <Campo
                         label='Imagem'
                         placeholder='Informe o endereço da imagem'
                         valor={imagem}
@@ -73,20 +73,20 @@ const Formulario = ({ times, aoColaboradorCadastrado, cadastrarTime }) => {
             </form>
             <form onSubmit={aoSubmeterNovoTime}>
                 <h2>Preencha os dados para criar um time.</h2>
-                    <CampoTexto
+                    <Campo
                         obrigatorio={true}
                         label='Nome'
                         placeholder='Digite o nome do time'
                         valor={nomeTime}
                         aoAlterado={valor => setNomeTime(valor)}
                     />
-                    <div>
-                        <label>Escolha a cor do time</label>
-                        <input
-                            type='color'
-                            onChange={e => setCorTime(e.target.value)}
-                        />
-                    </div>
+                    <Campo
+                        type='color'
+                        label='Cor do time'
+                        placeholder='Digite a cor do time'
+                        valor={corTime}
+                        aoAlterado={valor => setCorTime(valor)}
+                    />
                     <Botao>
                         Criar Time
                     </Botao>
