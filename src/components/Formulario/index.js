@@ -4,16 +4,18 @@ import CampoTexto from '../CampoTexto';
 import ListaSuspensa from '../ListaSuspensa';
 import './Formulario.css';
 
-const Formulario = (props) => {
+const Formulario = ({ times, aoColaboradorCadastrado, cadastrarTime }) => {
 
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
     const [imagem, setImagem] = useState('');
     const [time, setTime] = useState('');
+    const [nomeTime, setNomeTime] = useState('');
+    const [corTime, setCorTime] = useState('');
 
     const aoSalvar = (e) => {
         e.preventDefault();
-        props.aoColaboradorCadastrado({
+        aoColaboradorCadastrado({
             nome,
             cargo,
             imagem,
@@ -23,7 +25,15 @@ const Formulario = (props) => {
         setCargo('');
         setImagem('');
         setTime('');
-        console.log('o formulario foi submetido', nome, cargo, imagem, time);
+    }
+
+    const aoSubmeterNovoTime = (e) => {
+        e.preventDefault()
+        cadastrarTime({
+            nome: nomeTime,
+            cor: corTime
+        })
+        setNomeTime('');
     }
 
     return (
@@ -53,12 +63,32 @@ const Formulario = (props) => {
                     <ListaSuspensa
                         obrigatorio={true}
                         label='Time'
-                        itens={props.times}
+                        itens={times}
                         valor={time}
                         aoAlterado={valor => setTime(valor)}
                     />
                     <Botao>
                         Criar Card
+                    </Botao>
+            </form>
+            <form onSubmit={aoSubmeterNovoTime}>
+                <h2>Preencha os dados para criar um time.</h2>
+                    <CampoTexto
+                        obrigatorio={true}
+                        label='Nome'
+                        placeholder='Digite o nome do time'
+                        valor={nomeTime}
+                        aoAlterado={valor => setNomeTime(valor)}
+                    />
+                    <div>
+                        <label>Escolha a cor do time</label>
+                        <input
+                            type='color'
+                            onChange={e => setCorTime(e.target.value)}
+                        />
+                    </div>
+                    <Botao>
+                        Criar Time
                     </Botao>
             </form>
         </section>
